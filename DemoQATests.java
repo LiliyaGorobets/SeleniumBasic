@@ -1,16 +1,15 @@
 package ru.academits;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.concurrent.TimeUnit;
 
 public class DemoQATests {
@@ -36,54 +35,103 @@ public class DemoQATests {
 
     @Test
     public void studentRegistrationFormTest() {
-        driver.findElement(By.xpath("//*[@id='firstName']")).sendKeys("Amitabch");
-        driver.findElement(By.xpath("//*[@id='lastName']")).sendKeys("Bachchan");
-        driver.findElement(By.xpath("//*[@id='userEmail']")).sendKeys("chacha@gmail.com");
-        driver.findElement(By.xpath("//*[@for='gender-radio-1']")).click();
-        driver.findElement(By.xpath("//*[@id='userNumber']")).sendKeys("9876543212");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//*[@id='dateOfBirthInput']")).click();
-        driver.findElement(By.xpath("//*[@class='react-datepicker__month-select']")).click();
-        driver.findElement(By.xpath("//*[@value='9']")).click();
-        driver.findElement(By.xpath("//*[@class='react-datepicker__year-select']")).click();
-        driver.findElement(By.xpath("//*[@value='1941']")).click();
-        driver.findElement(By.xpath("//div[text()='11']")).click();
-        driver.findElement(By.xpath("//*[@id='subjectsInput']")).sendKeys("Arts");
-        driver.findElement(By.xpath("//*[@id='subjectsInput']")).sendKeys(Keys.ENTER);
-        driver.findElement(By.xpath("//*[@class='css-12jo7m5 subjects-auto-complete__multi-value__label']")).click();
-        driver.findElement(By.xpath("//*[@for='hobbies-checkbox-3']")).click();
-        driver.findElement(By.xpath("//*[@id='uploadPicture']")).sendKeys("https://github.com/LiliyaGorobets/SeleniumBasic/blob/master/570.jpg");
-        driver.findElement(By.xpath("//*[@id='currentAddress']")).sendKeys("Badi Choupad, Pink City" + Keys.ENTER);
-        driver.findElement(By.xpath("//*[@id='state']")).click();
 
-//        WebDriverWait wait = new WebDriverWait(driver, 30, 500);
-//        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='state']")));
-//        driver.findElement(By.xpath("//*[@id='state']")).sendKeys("Rajasthan" + Keys.ENTER);
-//        driver.findElement(By.xpath("//div[text()='Select City']")).sendKeys("Jaipur" + Keys.ENTER);
+        String firstNameInput = "Amitabch";
+        WebElement firstName = driver.findElement(By.xpath("//*[@id='firstName']"));
+        firstName.sendKeys(firstNameInput);
 
-        driver.findElement(By.xpath("//*[@id='submit']")).submit();
-        driver.findElement(By.xpath("//td[text()='Amitabch Bachchan']"));
+        String lastNameInput = "Bachchan";
+        WebElement lastName = driver.findElement(By.xpath("//*[@id='lastName']"));
+        lastName.sendKeys(lastNameInput);
+
+        String emailInput = "chacha@gmail.com";
+        WebElement email = driver.findElement(By.xpath("//*[@id='userEmail']"));
+        email.sendKeys(emailInput);
+
+        WebElement maleGenderRadiobutton = driver.findElement(By.xpath("//*[@for='gender-radio-1']"));
+        maleGenderRadiobutton.click();
+
+        String mobileNumberInput = "9876543212";
+        WebElement mobileNumber = driver.findElement(By.xpath("//*[@id='userNumber']"));
+        mobileNumber.sendKeys(mobileNumberInput);
+
+        WebElement dateOfBirthInput = driver.findElement(By.xpath("//*[@id='dateOfBirthInput']"));
+        dateOfBirthInput.click();
+
+        WebElement montOfBirthInput = driver.findElement(By.xpath("//*[@class='react-datepicker__month-select']"));
+        montOfBirthInput.click();
+
+        WebElement valueMontOfBirthInput = driver.findElement(By.xpath("//*[@value='9']"));
+        valueMontOfBirthInput.click();
+
+        WebElement yeartOfBirthInput = driver.findElement(By.xpath("//*[@class='react-datepicker__year-select']"));
+        yeartOfBirthInput.click();
+
+        WebElement valueYeartOfBirthInput = driver.findElement(By.xpath("//*[@value='1941']"));
+        valueYeartOfBirthInput.click();
+
+        WebElement dayOfBirthInput = driver.findElement(By.xpath("//div[text()='11']"));
+        dayOfBirthInput.click();
+
+        String subjectsInput = "Arts";
+        WebElement subjects = driver.findElement(By.xpath("//*[@id='subjectsInput']"));
+        subjects.sendKeys(subjectsInput);
+        subjects.sendKeys(Keys.ENTER);
+
+        WebElement hobbiesCheckbox = driver.findElement(By.xpath("//*[@for='hobbies-checkbox-3']"));
+        hobbiesCheckbox.click();
+
+        WebElement selectPicture = driver.findElement(By.xpath("//*[@id='uploadPicture']"));
+        selectPicture.sendKeys("C:/test/SeleniumBasic/src/test/java/ru/academits/570.jpg");
+
+        String currentAdressInput = "Hawa Mahal Rd, Badi Choupad, Pink City";
+        WebElement currentAdress = driver.findElement(By.xpath("//*[@id='currentAddress']"));
+        currentAdress.sendKeys(currentAdressInput + Keys.ENTER);
+
+        String stateSelectInput = "Rajasthan";
+        WebElement stateSelect = driver.findElement(By.xpath("//*[@id='react-select-3-input']"));
+        stateSelect.sendKeys(stateSelectInput);
+        stateSelect.sendKeys(Keys.ENTER);
+
+        String citySelectInput = "Jaipur";
+        WebElement citySelect = driver.findElement(By.xpath("//*[@id='react-select-4-input']"));
+        citySelect.sendKeys(citySelectInput);
+        citySelect.sendKeys(Keys.ENTER);
+
+        WebElement buttonSubmit = driver.findElement(By.xpath("//*[@id='submit']"));
+        buttonSubmit.submit();
+
+        WebElement studentName = driver.findElement(By.xpath("//td[text()='Amitabch Bachchan']"));
         Assertions.assertEquals("Amitabh Bachchan", "Amitabh Bachchan");
-        driver.findElement(By.xpath("//td[text()='chacha@gmail.com']"));
+
+        WebElement studentEmail = driver.findElement(By.xpath("//td[text()='chacha@gmail.com']"));
         Assertions.assertEquals("chacha@gmail.com", "chacha@gmail.com");
-        driver.findElement(By.xpath("//td[text()='Male']"));
+
+        WebElement gender = driver.findElement(By.xpath("//td[text()='Male']"));
         Assertions.assertEquals("Male", "Male");
-        driver.findElement(By.xpath("//td[text()='9876543212']"));
+
+        WebElement mobile = driver.findElement(By.xpath("//td[text()='9876543212']"));
         Assertions.assertEquals("9876543212", "9876543212");
-        driver.findElement(By.xpath("//td[text()='11 October,1941']"));
-        Assertions.assertEquals("11 October,1942", "11 October,1942");
-        driver.findElement(By.xpath("//td[text()='Arts']"));
+
+        WebElement dateOfBirth = driver.findElement(By.xpath("//td[text()='11 October,1941']"));
+
+
+        WebElement subjectsString = driver.findElement(By.xpath("//*[@class='table-responsive']//tbody/tr[6]/td[2]"));
         Assertions.assertEquals("Arts", "Arts");
-        driver.findElement(By.xpath("//td[text()='Music']"));
+
+        WebElement hobbies = driver.findElement(By.xpath("//td[text()='Music']"));
         Assertions.assertEquals("Music", "Music");
-        driver.findElement(By.xpath("//td[text()='570.jpg']"));
+
+        WebElement picture = driver.findElement(By.xpath("//td[text()='570.jpg']"));
         Assertions.assertEquals("570.jpg", "570.jpg");
-        driver.findElement(By.xpath("//td[text()='Badi Choupad, Pink City']"));
+
+        WebElement address = driver.findElement(By.xpath("//*[@class='table-responsive']//tbody/tr[9]/td[2]"));
         Assertions.assertEquals("Hawa Mahal Rd, Badi Choupad, Pink City", "Hawa Mahal Rd, Badi Choupad, Pink City");
-        //    driver.findElement(By.xpath("//td[text()='Rajasthan']"));
-        //    Assertions.assertEquals("Rajasthan Jaipur", "Rajasthan");
-        //    driver.findElement(By.xpath("//td[text()='Jaipur']"));
-        //   Assertions.assertEquals("Rajasthan Jaipur", "Jaipur");
+
+        WebElement stateAndCity = driver.findElement(By.xpath("//*[@class='table-responsive']//tbody/tr[10]/td[2]"));
+        Assertions.assertEquals("Rajasthan Jaipur", "Rajasthan Jaipur");
+
+        WebElement closeButton = driver.findElement(By.xpath("//*[@class='modal-content']//div[3]/button"));
     }
 
     @AfterEach
