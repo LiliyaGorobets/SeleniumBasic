@@ -81,8 +81,15 @@ public class DemoQATests {
         WebElement hobbiesCheckbox = driver.findElement(By.xpath("//*[@for='hobbies-checkbox-3']"));
         hobbiesCheckbox.click();
 
-        WebElement selectPicture = driver.findElement(By.xpath("//*[@id='uploadPicture']"));
-        selectPicture.sendKeys("C:/test/SeleniumBasic/src/test/java/ru/academits/570.jpg");
+       // By selectPicture = By.xpath("//input[@type='file']");
+       // String filePath = "C:/test/SeleniumBasic/src/test/java/ru/academits/570.jpg";
+        //driver.findElement(selectPicture).sendKeys("C:/test/SeleniumBasic/src/test/java/ru/academits/570.jpg");
+
+       // File file = new File(C:/test/SeleniumBasic/src/test/java/ru/academits/570.jpg);
+       // type(570.jpg, file.getAbsolutePath());
+
+        WebElement selectPicture = driver.findElement(By.xpath("//input[@type='file']"));
+        selectPicture.sendKeys("https://github.com/LiliyaGorobets/SeleniumBasic/blob/master/570.jpg");
 
         String currentAdressInput = "Hawa Mahal Rd, Badi Choupad, Pink City";
         WebElement currentAdress = driver.findElement(By.xpath("//*[@id='currentAddress']"));
@@ -101,39 +108,48 @@ public class DemoQATests {
         WebElement buttonSubmit = driver.findElement(By.xpath("//*[@id='submit']"));
         buttonSubmit.submit();
 
-        WebElement studentName = driver.findElement(By.xpath("//td[text()='Amitabch Bachchan']"));
-        Assertions.assertEquals("Amitabh Bachchan", "Amitabh Bachchan");
+        WebElement studentNameInput = driver.findElement(By.xpath("//td[text()='Amitabch Bachchan']"));
+        String studentNameText = studentNameInput.getText();
+        Assertions.assertEquals("Amitabch Bachchan", studentNameText);
 
-        WebElement studentEmail = driver.findElement(By.xpath("//td[text()='chacha@gmail.com']"));
-        Assertions.assertEquals("chacha@gmail.com", "chacha@gmail.com");
+        WebElement studentEmailInput = driver.findElement(By.xpath("//td[text()='chacha@gmail.com']"));
+        String studentEmailText = studentEmailInput.getText();
+        Assertions.assertEquals("chacha@gmail.com", studentEmailText);
 
-        WebElement gender = driver.findElement(By.xpath("//td[text()='Male']"));
-        Assertions.assertEquals("Male", "Male");
+        WebElement genderInput = driver.findElement(By.xpath("//td[text()='Male']"));
+        String genderText = genderInput.getText();
+        Assertions.assertEquals("Male", genderText);
 
-        WebElement mobile = driver.findElement(By.xpath("//td[text()='9876543212']"));
-        Assertions.assertEquals("9876543212", "9876543212");
+        WebElement mobileInput = driver.findElement(By.xpath("//td[text()='9876543212']"));
+        String mobileInputText = mobileInput.getText();
+        Assertions.assertEquals("9876543212", mobileInputText);
 
-        WebElement dateOfBirth = driver.findElement(By.xpath("//td[text()='11 October,1941']"));
-
+        WebElement dateOfBirthString = driver.findElement(By.xpath("//td[text()='11 October,1941']"));
+        String dateOfBirthStringText = dateOfBirthString.getText();
+        Assertions.assertEquals("11 October,1941", dateOfBirthStringText);
 
         WebElement subjectsString = driver.findElement(By.xpath("//*[@class='table-responsive']//tbody/tr[6]/td[2]"));
-        Assertions.assertEquals("Arts", "Arts");
+        String subjectsStringText = subjectsString.getText();
+        Assertions.assertEquals("Arts", subjectsStringText);
 
-        WebElement hobbies = driver.findElement(By.xpath("//td[text()='Music']"));
-        Assertions.assertEquals("Music", "Music");
+        WebElement hobbiesInput = driver.findElement(By.xpath("//td[text()='Music']"));
+        String hobbiesInputText = hobbiesInput.getText();
+        Assertions.assertEquals("Music", hobbiesInputText);
 
-        WebElement picture = driver.findElement(By.xpath("//td[text()='570.jpg']"));
-        Assertions.assertEquals("570.jpg", "570.jpg");
+        driver.findElement(By.xpath("//td[text()='570.jpg']"));
+        Assertions.assertEquals("570.jpg", driver.findElement(By.xpath("//td[text()='570.jpg']")).getText());
 
-        WebElement address = driver.findElement(By.xpath("//*[@class='table-responsive']//tbody/tr[9]/td[2]"));
-        Assertions.assertEquals("Hawa Mahal Rd, Badi Choupad, Pink City", "Hawa Mahal Rd, Badi Choupad, Pink City");
+        WebElement addressInput = driver.findElement(By.xpath("//*[@class='table-responsive']//tbody/tr[9]/td[2]"));
+        String addressText = addressInput.getText();
+        Assertions.assertEquals("Hawa Mahal Rd, Badi Choupad, Pink City", addressText);
 
-        WebElement stateAndCity = driver.findElement(By.xpath("//*[@class='table-responsive']//tbody/tr[10]/td[2]"));
-        Assertions.assertEquals("Rajasthan Jaipur", "Rajasthan Jaipur");
+        WebElement stateAndCityInput = driver.findElement(By.xpath("//*[@class='table-responsive']//tbody/tr[10]/td[2]"));
+        String stateAndCityText = stateAndCityInput.getText();
+        Assertions.assertEquals("Rajasthan Jaipur", stateAndCityText);
 
         WebElement closeButton = driver.findElement(By.xpath("//*[@class='modal-content']//div[3]/button"));
+        closeButton.click();
     }
-
     @AfterEach
     public void tearDown() {
         if (driver != null) {
@@ -141,5 +157,3 @@ public class DemoQATests {
         }
     }
 }
-
-
